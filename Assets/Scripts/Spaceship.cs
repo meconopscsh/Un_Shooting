@@ -20,6 +20,15 @@ public class Spaceship : MonoBehaviour {
     //爆発のプレハブ
     public GameObject explosion;
 
+	// アニメーターコンポーネント
+	private Animator animator;
+
+	void Start ()
+	{
+		// アニメーターコンポーネントを取得
+		animator = GetComponent<Animator> ();
+	}
+
     //爆発の生成
     public void Explosion ()
     {
@@ -33,18 +42,10 @@ public class Spaceship : MonoBehaviour {
         Instantiate(bullet, origin.position, origin.rotation);
     }
 
-    //機体の移動
-    public void Move(Vector2 direction)
-    {
-        GetComponent<Rigidbody2D>().velocity = direction * speed;
-    }
+	// アニメーターコンポーネントの取得
+	public Animator GetAnimator()
+	{
+		return animator;
+	}
 
-    void Start () {
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
 }

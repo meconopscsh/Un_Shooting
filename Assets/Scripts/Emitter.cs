@@ -9,6 +9,9 @@ public class Emitter : MonoBehaviour {
     // 現在のWave
     private int currentWave;
 
+	// Managerコンポーネント
+	private Manager manager;
+
     private IEnumerator Start()
     {
 
@@ -17,7 +20,15 @@ public class Emitter : MonoBehaviour {
             yield break;
         }
 
+		// Managerコンポーネントをシーン内から探して取得する
+		manager = FindObjectOfType<Manager>();
+
         while (true) {
+
+			// タイトル表示中は待機
+			while(manager.IsPlaying() == false) {
+				yield return new WaitForEndOfFrame ();
+			}
 
             // Waveを作成する
             GameObject wave = (GameObject)Instantiate(waves[currentWave], transform.position, Quaternion.identity);
